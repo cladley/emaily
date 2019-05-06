@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import reduxThunk from 'redux-thunk';
+import reduxThunk from "redux-thunk";
 import "materialize-css/dist/css/materialize.min.css";
 
 import App from "./components/App";
@@ -16,3 +16,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
+
+console.log(process.env.REACT_APP_STRIPE_KEY);
