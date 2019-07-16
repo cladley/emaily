@@ -8,10 +8,6 @@ module.exports = app => {
     })
   );
 
-  app.get("/auth/test", (req, res) => {
-    res.send("Yoo test");
-  });
-
   app.get(
     "/auth/google/callback",
     passport.authenticate("google"),

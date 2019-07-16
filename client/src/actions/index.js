@@ -21,3 +21,18 @@ export const handleToken = token => async dispatch => {
   payload = JSON.parse(payload);
   dispatch({ type: FETCH_USER, payload: payload });
 };
+
+export const submitSurvey = (values, history) => async dispatch => {
+  const res = await fetch("/api/surveys", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(values)
+  });
+
+  let payload = await res.text();
+  payload = JSON.parse(payload);
+  dispatch({ type: FETCH_USER, payload: payload });
+  history.push("/surveys");
+};
