@@ -1,4 +1,4 @@
-import { FETCH_USER } from "./types";
+import { FETCH_USER, FETCH_SURVEYS } from "./types";
 
 export const fetchUser = () => {
   return async function(dispatch) {
@@ -35,4 +35,14 @@ export const submitSurvey = (values, history) => async dispatch => {
   payload = JSON.parse(payload);
   dispatch({ type: FETCH_USER, payload: payload });
   history.push("/surveys");
+};
+
+export const fetchSurveys = () => {
+  return async function(dispatch) {
+    const res = await fetch("/api/surveys");
+    let payload = await res.text();
+    payload = payload ? JSON.parse(payload) : "";
+
+    dispatch({ type: FETCH_SURVEYS, payload });
+  };
 };
