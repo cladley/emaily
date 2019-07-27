@@ -1,0 +1,28 @@
+.badge {
+  padding: 20px;
+  display: inline-block;
+}
+
+.badge--published {
+  color: white !important;
+  background: #3e2c84;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-transform: uppercase;
+}
+
+.badge--draft {
+  background-color: lightgray;
+  color: darkgrey;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  text-transform: uppercase;
+}
+
+.badge--draft ~ .btn-small {
+  position: absolute;
+  right: 8px;
+  top: 40px;
+}

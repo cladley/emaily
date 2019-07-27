@@ -4,7 +4,13 @@ import { withRouter } from "react-router-dom";
 import formFields from "./formFields";
 import * as actions from "../../actions";
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
+const SurveyFormReview = ({
+  onCancel,
+  formValues,
+  history,
+  submitAction,
+  dispatch
+}) => {
   const reviewFields = formFields.map(({ name, label }) => {
     return (
       <div key={name}>
@@ -13,6 +19,16 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
       </div>
     );
   });
+
+  const saveSurvey = () => {
+    formValues["status"] = "Draft";
+    submitAction(formValues, history)(dispatch);
+  };
+
+  const sendSurvey = () => {
+    formValues["status"] = "Published";
+    submitAction(formValues, history)(dispatch);
+  };
 
   return (
     <div>
@@ -24,12 +40,21 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
       >
         Back
       </button>
+
       <button
-        onClick={() => submitSurvey(formValues, history)}
+        className="blue btn-flat white-text right"
+        onClick={() => saveSurvey()}
+      >
+        Save
+        <i className="material-icons">save</i>
+      </button>
+
+      <button
+        onClick={() => sendSurvey()}
         className="green btn-flat white-text right"
       >
         Send Survey
-        <i className="material-icons right">email</i>
+        <i className="material-icons">email</i>
       </button>
     </div>
   );
@@ -39,7 +64,4 @@ const mapStateToProps = state => {
   return { formValues: state.form.surveyForm.values };
 };
 
-export default connect(
-  mapStateToProps,
-  actions
-)(withRouter(SurveyFormReview));
+export default connect(mapStateToProps)(withRouter(SurveyFormReview));

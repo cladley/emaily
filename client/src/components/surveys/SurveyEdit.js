@@ -4,7 +4,7 @@ import SurveyForm from "./SurveyForm";
 import SurveyFormReview from "./SurveyFormReview";
 import { submitSurvey } from "../../actions";
 
-class SurveyNew extends Component {
+class SurveyEdit extends Component {
   state = { showFormReview: false };
 
   renderContent() {
@@ -31,4 +31,4 @@ class SurveyNew extends Component {
 
 export default reduxForm({
   form: "surveyForm"
-})(SurveyNew);
+})(SurveyEdit);

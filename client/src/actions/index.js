@@ -1,4 +1,4 @@
-import { FETCH_USER, FETCH_SURVEYS } from "./types";
+import { FETCH_USER, FETCH_SURVEYS, EDIT_SURVEY } from "./types";
 
 export const fetchUser = () => {
   return async function(dispatch) {
@@ -45,4 +45,8 @@ export const fetchSurveys = () => {
 
     dispatch({ type: FETCH_SURVEYS, payload });
   };
+};
+
+export const editSurvey = survey => {
+  return { type: EDIT_SURVEY, payload: survey };
 };

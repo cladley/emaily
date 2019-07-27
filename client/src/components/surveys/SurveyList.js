@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchSurveys } from "../../actions";
+import { fetchSurveys, editSurvey } from "../../actions";
+import { Link, withRouter } from "react-router-dom";
 
 class SurveyList extends Component {
   componentDidMount() {
-    this.props.fetchSurveys();
+    fetchSurveys()(this.props.dispatch);
+    // this.props.fetchSurveys();
   }
 
   renderSurveys() {
@@ -17,7 +19,27 @@ class SurveyList extends Component {
             <p className="right">
               Sent On: {new Date(survey.dateSent).toLocaleDateString()}
             </p>
+
+            {survey.status === "Published" && (
+              <span className="badge badge--published">Published</span>
+            )}
+
+            {survey.status === "Draft" && (
+              <>
+                <span className="badge badge--draft">Draft</span>
+                <button
+                  className="waves-effect waves-light btn-small"
+                  onClick={() => {
+                    this.props.dispatch(editSurvey(survey));
+                    this.props.history.push("/surveys/edit");
+                  }}
+                >
+                  Edit
+                </button>
+              </>
+            )}
           </div>
+
           <div className="card-action">
             <a>Yes: {survey.yes}</a>
             <a>No: {survey.no}</a>
@@ -33,10 +55,7 @@ class SurveyList extends Component {
 }
 
 const mapStateToProps = state => {
-  return { surveys: state.surveys };
+  return { surveys: state.surveys.surveys };
 };
 
-export default connect(
-  mapStateToProps,
-  { fetchSurveys }
-)(SurveyList);
+export default withRouter(connect(mapStateToProps)(SurveyList));

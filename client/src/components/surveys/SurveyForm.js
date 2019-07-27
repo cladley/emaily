@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import SurveyField from "./SurveyField";
 import validEmails from "../../utils/validateEmails";
 import formFields from "./formFields";
 
 class SurveyForm extends Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
   renderFields() {
     return (
       <div>
@@ -55,8 +59,16 @@ function validate(values) {
   return errors;
 }
 
-export default reduxForm({
+const mapStateToProps = state => {
+  return {
+    initialValues: state.surveys.editSurvey
+  };
+};
+
+const surveyReduxForm = reduxForm({
   validate,
   destroyOnUnmount: false,
   form: "surveyForm"
 })(SurveyForm);
+
+export default connect(mapStateToProps)(surveyReduxForm);

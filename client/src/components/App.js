@@ -6,6 +6,7 @@ import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
 import SurveyNew from "./surveys/SurveyNew";
+import SurveyEdit from "./surveys/SurveyEdit";
 
 import axios from "axios";
 window.axios = axios;
@@ -24,6 +25,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/surveys" component={Dashboard} />
             <Route path="/surveys/new" component={SurveyNew} />
+            <Route path="/surveys/edit" component={SurveyEdit} />
           </div>
         </BrowserRouter>
       </div>
